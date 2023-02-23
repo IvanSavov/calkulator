@@ -1,5 +1,8 @@
 let canvas = document.getElementById("cangame");
 let context = canvas.getContext("2d");
+
+
+
 let result = document.getElementById("k");
 let first = document.getElementById("kk");
 let button = document.getElementById("+");
@@ -16,7 +19,7 @@ context.font = "35px Arial";
 let letter = 0;
 const cars = ["A", "B", "C","D", "E", "F","G", "H", "I","J", "K", "L","M", "N", "O","P", "Q", "R","S", "T", "U","V", "W", "X","Y", "Z"];
 const words = ["forward","language","gesture","cat","fish","country","dog"];
-
+ 
 let f = Math.floor(Math.random() * words.length);
 const tel = [];
 let k =words[f].charAt(0); 
@@ -25,21 +28,23 @@ result.innerText = words[f];
 for(let m = 0;m < words[f].length; m++) {
     tel.push(words[f].charAt(m));
 }
+ let tel2 = [];
+let lenght = [];
 
-let lenght = "_ ";
-
-for(let hg = 0;hg < words[f].length -3;hg++) {
-    lenght = lenght.concat("_ ");
+for(let hg = 0;hg < words[f].length -2;hg++) {
+    lenght[hg] = "_";
 }
-
-first.innerText = tel[0]  + lenght  + tel[words[f].length-1];
+ tel2[0] = tel[0] + lenght + tel[words[f].length-1];
+   
+first.innerText = tel2;
 //var tel2 = tel[0]  + lenght  + tel[words[f].length-1];
 
 function drawMap() {
+
     if(letter > 25) {
         letter = 0;
     }
-    
+   
     context.clearRect(0, 0,canvas.width,  canvas.height);
     context.drawImage(heroimg,herox* sqside,heroy * sqside,sqside,sqside);
     for (let i = 0;i < nx; i++) {
@@ -65,20 +70,23 @@ canvas.onclick = function(e) {
 } 
 
 button.onclick = function() {
-    let tel2 = [];
-    tel2[0] = tel[0];
-    tel2[words[f].length-1] = tel[words[f].length-1];
-    for(let kkk = 0;kkk < words[f].length-2;kkk++) {
-        tel2[kkk+1]=lenght.charAt(kkk);
-    } 
+   
+   tel2[0] = tel[0];
+   tel2[words[f].length-1] = tel[words[f].length-1];
+ 
+    
     
     let bukva = cars[5*herox + heroy];
     bukva = bukva.toLowerCase();
     for(let kl = 1;kl < words[f].length-1;kl++) {
+       
+       
+    
         if(bukva == tel[kl]) {
             tel2[kl]=tel[kl];
             first.innerText = tel2;
         }
+        
     }
 }
 
@@ -112,3 +120,8 @@ document.onkeypress = function(e) {
         console.log(key);
    }
 }
+context.beginPath();
+context.moveTo(300, 20); // Begin first sub-path
+context.lineTo(300, 100);
+
+context.stroke();
