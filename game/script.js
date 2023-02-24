@@ -1,20 +1,26 @@
 let canvas = document.getElementById("cangame");
 let context = canvas.getContext("2d");
+let can = document.getElementById("can");
+let ctx = can.getContext("2d");
 
-
-
+//let greshka = 0;
+//let cas = 0;
+let res = document.getElementById("kkk");
 let result = document.getElementById("k");
 let first = document.getElementById("kk");
 let button = document.getElementById("+");
 let nx = 6;
 let ny = 5;
 let sqside = 50
+can.height = ny* sqside;
+can.width = nx* sqside;
+
 let herox = 0;
 let heroy = 0;
 let heroimg = new Image();
 heroimg.src = "hero.png";
-canvas.height = ny * sqside;
-canvas.weight = nx * sqside;
+canvas.height = ny* sqside;
+canvas.width = nx* sqside;
 context.font = "35px Arial";
 let letter = 0;
 const cars = ["A", "B", "C","D", "E", "F","G", "H", "I","J", "K", "L","M", "N", "O","P", "Q", "R","S", "T", "U","V", "W", "X","Y", "Z"];
@@ -33,19 +39,20 @@ let lenght = [];
 
 for(let hg = 0;hg < words[f].length -2;hg++) {
     lenght[hg] = "_";
+    tel2[hg+1] = lenght[hg];
 }
- tel2[0] = tel[0] + lenght + tel[words[f].length-1];
+tel2[0] = tel[0];
+tel2[words[f].length-1] = tel[words[f].length-1];
    
 first.innerText = tel2;
 //var tel2 = tel[0]  + lenght  + tel[words[f].length-1];
-
 function drawMap() {
 
     if(letter > 25) {
         letter = 0;
     }
    
-    context.clearRect(0, 0,canvas.width,  canvas.height);
+    context.clearRect(0, 0,nx* sqside,  ny* sqside);
     context.drawImage(heroimg,herox* sqside,heroy * sqside,sqside,sqside);
     for (let i = 0;i < nx; i++) {
         for(let j = 0;j < ny; j++) {
@@ -61,6 +68,14 @@ function drawMap() {
 context.drawImage(heroimg,herox* sqside,heroy * sqside,sqside,sqside);
 
 drawMap ();
+
+    //ctx.stroke();
+
+
+
+draw ();
+
+
 canvas.onclick = function(e) {
     let x = e.x - canvas.offsetLeft;
     let y = e.y - canvas.offsetTop;
@@ -69,27 +84,102 @@ canvas.onclick = function(e) {
     drawMap();
 } 
 
+
+
 button.onclick = function() {
-   
-   tel2[0] = tel[0];
-   tel2[words[f].length-1] = tel[words[f].length-1];
- 
-    
-    
     let bukva = cars[5*herox + heroy];
     bukva = bukva.toLowerCase();
     for(let kl = 1;kl < words[f].length-1;kl++) {
-       
-       
-    
         if(bukva == tel[kl]) {
             tel2[kl]=tel[kl];
-            first.innerText = tel2;
+            first.innerText = tel2;        
         }
-        
     }
 }
 
+function draw() {
+   // ctx.beginPath();
+   // switch(cas){
+
+    //case 1: 
+            ctx.beginPath();
+            ctx.moveTo(25,0);
+            ctx.lineTo(25, 250); 
+            ctx.stroke(); 
+            
+
+    //case 2: 
+ctx.beginPath();
+            ctx.moveTo(25,1);
+            ctx.lineTo(275, 1);
+            ctx.stroke();
+
+   // case 3: 
+ctx.beginPath();
+            ctx.moveTo(275,1);
+            ctx.lineTo(275, 250);
+            ctx.stroke();
+
+    //case  4: 
+ctx.beginPath();
+             ctx.moveTo(150,1);
+             ctx.lineTo(150, 50);
+             ctx.stroke();
+
+    //case 5: 
+ctx.beginPath();
+            ctx.arc(150, 80, 30, 0, 2 * Math.PI, false);
+            ctx.stroke();
+
+   // case 6: 
+ctx.beginPath();
+            ctx.moveTo(150,110);
+            ctx.lineTo(150, 175);
+            ctx.stroke();
+
+   // case 7: 
+ctx.beginPath();
+            ctx.moveTo(150,175);
+            ctx.lineTo(100, 250);
+            ctx.stroke();
+    
+    //case 8: 
+ctx.beginPath();
+            ctx.moveTo(150,175);
+            ctx.lineTo(200, 250);
+            ctx.stroke();
+    
+   // case 9: 
+ctx.beginPath();
+            ctx.moveTo(150,110);
+            ctx.lineTo(100, 150);
+            ctx.stroke();
+
+
+    //case 10: 
+ctx.beginPath();
+             ctx.moveTo(150,110);
+             ctx.lineTo(200, 150);
+             ctx.stroke();
+
+   // case 11: 
+ctx.beginPath();
+             ctx.moveTo(275,1);
+             ctx.lineTo(25, 250);
+             ctx.stroke();
+
+    //case 12: 
+ctx.beginPath();
+             ctx.moveTo(25,1);
+             ctx.lineTo(275, 250); 
+             ctx.stroke();
+    
+   // }
+    //ctx.stroke();
+
+}
+
+draw ();
 function moveLeft() {
     herox--;
     drawMap();
@@ -120,8 +210,4 @@ document.onkeypress = function(e) {
         console.log(key);
    }
 }
-context.beginPath();
-context.moveTo(300, 20); // Begin first sub-path
-context.lineTo(300, 100);
 
-context.stroke();
