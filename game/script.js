@@ -3,8 +3,15 @@ let context = canvas.getContext("2d");
 let can = document.getElementById("can");
 let ctx = can.getContext("2d");
 
-//let greshka = 0;
-//let cas = 0;
+
+
+
+let greshka = 0;
+let cas = 0;
+
+
+
+
 let res = document.getElementById("kkk");
 let result = document.getElementById("k");
 let first = document.getElementById("kk");
@@ -15,8 +22,8 @@ let sqside = 50
 can.height = ny* sqside;
 can.width = nx* sqside;
 
-let herox = 0;
-let heroy = 0;
+let herox ;
+let heroy ;
 let heroimg = new Image();
 heroimg.src = "hero.png";
 canvas.height = ny* sqside;
@@ -57,6 +64,7 @@ function drawMap() {
     for (let i = 0;i < nx; i++) {
         for(let j = 0;j < ny; j++) {
             context.strokeRect(i * sqside, j * sqside, sqside, sqside);
+           
             context.fillText(cars[letter],i * sqside, (j+1) * sqside);
             letter++;
             console.log(herox,heroy);
@@ -83,98 +91,119 @@ canvas.onclick = function(e) {
     heroy = Math.floor(y/sqside);
     drawMap();
 } 
+//let verno = 0;
 
-
-
-button.onclick = function() {
-    let bukva = cars[5*herox + heroy];
-    bukva = bukva.toLowerCase();
-    for(let kl = 1;kl < words[f].length-1;kl++) {
-        if(bukva == tel[kl]) {
-            tel2[kl]=tel[kl];
-            first.innerText = tel2;        
+let kon = [];
+button.onclick = function() {      
+    var vhod = document.getElementById("vhod");     
+    if(vhod.value == words[f]) {
+        for(let i = 0;i < words[f].length;i++){
+            kon[i] = words[f].charAt(i);
         }
+     first.innerText = kon;
+     vhod.disabled = true;
+     }
+     else {
+         vhod.value = "";
+         greshka = 0;
+         let bukva = cars[5*herox + heroy];
+         bukva = bukva.toLowerCase();
+         for(let kl = 1;kl < words[f].length-1;kl++) {
+             if(bukva == tel[kl]) {
+                 tel2[kl]=tel[kl];
+                 first.innerText = tel2;  
+                  
+              }
+              else {
+                  greshka++;
+                  if(greshka == words[f].length-2) {
+                  cas++;
+                  res.innerText = cas + " mistake";
+               }
+         }
+     }
+     draw() ;
     }
 }
-
 function draw() {
    // ctx.beginPath();
-   // switch(cas){
+    switch(cas){
 
-    //case 1: 
+    case 1: 
             ctx.beginPath();
             ctx.moveTo(25,0);
             ctx.lineTo(25, 250); 
             ctx.stroke(); 
-            
+            break;
 
-    //case 2: 
+    case 2: 
 ctx.beginPath();
             ctx.moveTo(25,1);
             ctx.lineTo(275, 1);
             ctx.stroke();
-
-   // case 3: 
+            break;
+    case 3: 
 ctx.beginPath();
             ctx.moveTo(275,1);
             ctx.lineTo(275, 250);
             ctx.stroke();
-
-    //case  4: 
+            break;
+    case  4: 
 ctx.beginPath();
              ctx.moveTo(150,1);
              ctx.lineTo(150, 50);
              ctx.stroke();
-
-    //case 5: 
+             break;
+    case 5: 
 ctx.beginPath();
             ctx.arc(150, 80, 30, 0, 2 * Math.PI, false);
             ctx.stroke();
-
-   // case 6: 
+            break;
+    case 6: 
 ctx.beginPath();
             ctx.moveTo(150,110);
             ctx.lineTo(150, 175);
             ctx.stroke();
+            break;
 
-   // case 7: 
+    case 7: 
 ctx.beginPath();
             ctx.moveTo(150,175);
             ctx.lineTo(100, 250);
             ctx.stroke();
-    
-    //case 8: 
+             break;
+    case 8: 
 ctx.beginPath();
             ctx.moveTo(150,175);
             ctx.lineTo(200, 250);
             ctx.stroke();
-    
-   // case 9: 
+            break;
+    case 9: 
 ctx.beginPath();
             ctx.moveTo(150,110);
             ctx.lineTo(100, 150);
             ctx.stroke();
+            break;
 
-
-    //case 10: 
+    case 10: 
 ctx.beginPath();
              ctx.moveTo(150,110);
              ctx.lineTo(200, 150);
              ctx.stroke();
-
-   // case 11: 
+             break;
+    case 11: 
 ctx.beginPath();
              ctx.moveTo(275,1);
              ctx.lineTo(25, 250);
              ctx.stroke();
-
-    //case 12: 
+             break;
+    case 12: 
 ctx.beginPath();
              ctx.moveTo(25,1);
              ctx.lineTo(275, 250); 
              ctx.stroke();
-    
-   // }
+             break;
+    }
     //ctx.stroke();
 
 }
